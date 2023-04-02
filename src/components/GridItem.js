@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { CapWord } from '../helpers/CapWord';
+import { Link } from 'react-router-dom';
 
 const CenteredDiv = styled.div`
     position: relative;
@@ -14,7 +15,7 @@ const CenteredDiv = styled.div`
 const Imagen = styled.img`
     width: 100px;
     align-self: center;
-`
+`;
 
 const Button = styled.button`
     background: #363232;
@@ -29,7 +30,7 @@ const Button = styled.button`
         cursor: pointer;
         background: #000000;
     }
-`
+`;
 
 const TextAbilities = styled.div`
     display: flex;
@@ -38,7 +39,7 @@ const TextAbilities = styled.div`
     border-bottom: 2px solid;
     margin-bottom: 15px;
     max-height: auto;
-`
+`;
 
 const Abilities = styled.p`
     margin: 5px;
@@ -48,7 +49,7 @@ const Name = styled.p `
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-`
+`;
 
 const TypesText = styled.div`
     display: flex;
@@ -151,7 +152,9 @@ export default function GridItem({pokemon}) {
                 <TypeColor color={CapWord(type.type.name)}  key={type.type.name}>{CapWord(type.type.name)}</TypeColor>
             ))}
             </TypesText>
-            <Button>Shiny</Button>
+            <Link to={`/pokemon/${pokemon.id}`}>
+                <Button>Shiny</Button>
+            </Link>
         </ButtonContainer>
     </CenteredDiv>
   )

@@ -29,7 +29,7 @@ export const showAllPokemons = createAsyncThunk("pokemons/showAll", async({page 
     }
 })
 
-export const showPokemonID = createAsyncThunk("pokemons/showAll", async(id, thunkAPI) => {
+export const showPokemonID = createAsyncThunk("pokemons/showPokemon", async(id, thunkAPI) => {
 
     try {
         const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)

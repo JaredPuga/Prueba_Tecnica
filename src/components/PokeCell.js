@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CapWord } from "../helpers/CapWord";
+import { Link } from "react-router-dom";
 
 
 const TableCell = styled.td`
@@ -70,7 +71,7 @@ export default function PokeCell({pokemon}) {
     <TableCell>{pokemon.abilities.map(ability => (
         <p key={ability.ability.name}>{CapWord(ability.ability.name)}</p>
     ))}</TableCell>
-    <TableCell><Button>Shiny</Button></TableCell>
+    <TableCell><Link to={`/pokemon/${pokemon.id}`}><Button>Shiny</Button></Link></TableCell>
     </>
   )
 }

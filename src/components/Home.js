@@ -6,11 +6,21 @@ import GridCuadricula from './GridCuadricula';
 
 
 const Titulo = styled.h1`
-    color: #000000;
+    display: flex;
+    align-items: center;
     font-family: 'Pokemon Solid', sans-serif;
-    font-size: 60px;
+    font-size: 4rem;
     margin: 0;
     letter-spacing: 6px;
+    
+`;
+
+const TituloUser = styled.h3`
+    font-size: 1.5rem;
+`;
+
+const TituloUserName = styled.span`
+    color: var(--rojo);
 `;
 
 const GridPrincipal = styled.div`
@@ -82,7 +92,8 @@ const ViewButtonC = styled.button`
 `;
 
 const Logo = styled.img`
-    width: 80px;
+    width: 10%;
+    margin-right: 15px;
 `;
 
 const Header = styled.div`
@@ -92,6 +103,13 @@ const Header = styled.div`
     margin-bottom: 10px;
 `;
 
+const ContainerDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+`
+
 export default function Home() {
     const Selected = useSelector(store => store.buttonS)
     const dispatch = useDispatch()
@@ -99,8 +117,13 @@ export default function Home() {
   return (
     <GridPrincipal>
         <Header>
-            <Titulo>Pokédex</Titulo>
+            <ContainerDiv>
             <Logo src='/pokebola.png' />
+            <Titulo>Pokédex</Titulo>
+            </ContainerDiv>
+            <TituloUser>Bienvenido, 
+                <TituloUserName>Jared</TituloUserName>
+            </TituloUser>
         </Header>
         <GridButtons>
             <Search 
