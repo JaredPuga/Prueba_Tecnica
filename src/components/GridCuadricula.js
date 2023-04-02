@@ -1,28 +1,69 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { showAllPokemons } from "../features/pokemons/pokemonActions";
+import Loading from "./Loading";
+import GridItem from "./GridItem";
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Cada columna tendrá un ancho mínimo de 200px y se ajustará automáticamente para llenar el contenedor */
-  grid-gap: 16px; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  grid-gap: 16px;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+  }
 `;
 
-const GridItem = styled.div`
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-`;
 
 export default function GridCuadricula() {
+
+  const { data, error, success, loading } = useSelector(state => state.pokemons)
+
+  const dispatch = useDispatch()
+  const [pokemons, setPokemons] = useState([])
+  const [limit, setLimit] = useState(15)
+  const page = 1
+
+  useEffect(() => {
+    dispatch(showAllPokemons({page ,limit}))
+  }, [dispatch, limit])
+  
+
+  useEffect(() => {
+    if(success) {
+      setPokemons(data)
+    } else {
+      setPokemons([])
+    }
+    
+    if (error) {
+      console.log(error);
+    }
+
+  }, [error, success, data])
+
+  const handleScroll = () => {
+    if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+      setLimit(prev => prev + 10 )
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  }, [])
+  
   return (
-    <GridContainer>
-        <GridItem>Item 1</GridItem>
-        <GridItem>Item 2</GridItem>
-        <GridItem>Item 3</GridItem>
-        <GridItem>Item 4</GridItem>
-        <GridItem>Item 5</GridItem>
-        <GridItem>Item 5</GridItem>
-        <GridItem>Item 5</GridItem>
-        <GridItem>Item 5</GridItem>
-        <GridItem>Item 5</GridItem>
-    </GridContainer>
+        <>
+              <GridContainer>
+                { 
+                  pokemons.map(poke => (
+                      <GridItem key={poke.id} pokemon={poke}/>
+                  ))
+                }
+              </GridContainer>
+              {
+                loading && <Loading />
+              }
+        </>
   )
 }

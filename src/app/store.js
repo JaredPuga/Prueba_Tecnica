@@ -1,11 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import pokemonReducer from "../features/pokemons/pokemonSlice";
+import { configureStore} from "@reduxjs/toolkit";
 import buttonReducer from "../features/buttonSelect/buttonSlice";
+import PokemonsSlice from "../features/pokemons/pokemonsSlice";
 
 
 export default configureStore({
     reducer: {
-        pokemons: pokemonReducer,
         buttonS: buttonReducer,
+        pokemons: PokemonsSlice,
     },
+    middleware: (getDefaultMiddleware) =>  getDefaultMiddleware({
+        serializableCheck: false,
+    })
 })

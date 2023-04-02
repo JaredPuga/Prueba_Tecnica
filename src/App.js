@@ -1,13 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import { useSelector } from "react-redux";
+import './App.css'
 
 function App() {
-
-  const pokemons = useSelector(state => state.pokemons)
-
-  console.log(pokemons);
 
   return (
     <Router>
