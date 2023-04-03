@@ -28,6 +28,6 @@ export const MoveDescription = styled.p`
 `;
 
 export const MoveValue = styled.p`
-    color: #C3BCBB;
+    color: #4c6e81;
     font-weight: bold;
 `;

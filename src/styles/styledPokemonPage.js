@@ -108,8 +108,8 @@ export const DivTypes = styled.div`
 export const Name = styled.h1`
   margin: 0;
   font-size: 20px;
-  font-weight: 100;
-  color: #E3A231;
+  font-weight: bold;
+  color: #571845;
   
   @media (min-width: 768px) {
     font-size: 45px;
