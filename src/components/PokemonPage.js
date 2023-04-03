@@ -4,18 +4,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { showAbilities, showMovimientos, showPokemonID } from "../features/pokemons/pokemonActions"
 import { CapWord } from "../helpers/CapWord"
 import { RedBackground, TypeColor } from "../styles/styledComponents"
-import { AbilitiesPokemon, Button, Columna1, Columna2, Container, ContainerPrincipal, GridContainer, ImagenSprite, LeftArrow, MovesPokemon, NamePokemon, RightArrow, DivTypes, Name } from "../styles/styledPokemonPage"
+import { AbilitiesPokemon, Button, Columna1, Columna2, Container, ContainerPrincipal, GridContainer, ImagenSprite, LeftArrow, MovesPokemon, NamePokemon, RightArrow, DivTypes, Name, DivContenedor } from "../styles/styledPokemonPage"
 import Loading from "./Loading"
-import styled from "styled-components"
 import PokemonMove from "./PokemonMove"
 import PokemonAbility from "./PokemonAbility"
-
-const DivContenedor = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid;
-  padding: 25px;
-`
 
 
 export default function PokemonPage() {

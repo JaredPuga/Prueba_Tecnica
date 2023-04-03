@@ -102,3 +102,10 @@ export const Name = styled.h1`
   font-size: 45px;
   font-weight: 300;
 `;
+
+export const DivContenedor = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  padding: 25px;
+`

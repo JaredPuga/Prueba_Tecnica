@@ -1,10 +1,28 @@
+import styled from "styled-components";
 import { CapWord } from "../helpers/CapWord";
 
+const TitleAbility = styled.h1`
+    font-size: 20px;   
+`;
+
+const DescriptionAbility = styled.p`
+    font-weight: 300;
+    font-size: 15px;
+    margin: 0;
+`;
+
+const DivAbility = styled.div `
+    display: flex;
+    border-bottom: 1px solid;
+`;
+
 export default function PokemonAbility({ability}) {
+
+    const text = ability.flavor_text_entries.find(desc => desc.language.name === 'es')
+
   return (
-    <>
-        <h1>{CapWord(ability.name)}</h1>
-        <h3>{ability.flavor_text_entries[13].flavor_text}</h3>
-    </>
+    <DivAbility>
+        <TitleAbility>{CapWord(ability.name)}: <DescriptionAbility>{text.flavor_text}</DescriptionAbility></TitleAbility>
+    </DivAbility>
   )
 }
