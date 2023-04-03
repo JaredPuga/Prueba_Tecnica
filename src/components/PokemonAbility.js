@@ -1,29 +1,21 @@
-import styled from "styled-components";
 import { CapWord } from "../helpers/CapWord";
+import {
+  DescriptionAbility,
+  DivAbility,
+  TitleAbility,
+} from "../styles/styledPokemonAbilities";
 
-const TitleAbility = styled.h1`
-    font-size: 20px;
-    font-weight: bold;
-`;
-
-const DescriptionAbility = styled.p`
-    font-weight: 300;
-    font-size: 15px;
-    margin: 0;
-`;
-
-const DivAbility = styled.div `
-    display: flex;
-    border-bottom: 1px solid;
-`;
-
-export default function PokemonAbility({ability}) {
-
-    const text = ability.flavor_text_entries.find(desc => desc.language.name === 'es')
+export default function PokemonAbility({ ability }) {
+  const text = ability.flavor_text_entries.find(
+    (desc) => desc.language.name === "es"
+  );
 
   return (
     <DivAbility>
-        <TitleAbility>{CapWord(ability.name)}: <DescriptionAbility>{text.flavor_text}</DescriptionAbility></TitleAbility>
+      <TitleAbility>
+        {CapWord(ability.name)}:{" "}
+        <DescriptionAbility>{text.flavor_text}</DescriptionAbility>
+      </TitleAbility>
     </DivAbility>
-  )
+  );
 }

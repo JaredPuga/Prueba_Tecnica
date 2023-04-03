@@ -58,14 +58,22 @@ export const Button = styled.button`
 
 export const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 15px;
   height: auto;
   margin-top: 20px;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const Columna1 = styled.div`
-  grid-column: 1/3;
+  grid-column: 1;
+
+  @media (min-width: 768px) {
+    grid-column: 1 / 3;
+  }
 `;
 
 export const Columna2 = styled.div`
@@ -99,9 +107,13 @@ export const DivTypes = styled.div`
 
 export const Name = styled.h1`
   margin: 0;
-  font-size: 45px;
+  font-size: 20px;
   font-weight: 100;
   color: #E3A231;
+  
+  @media (min-width: 768px) {
+    font-size: 45px;
+  }
 `;
 
 export const DivContenedor = styled.div`

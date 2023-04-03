@@ -1,24 +1,54 @@
 import styled from "styled-components";
 
-export const PaginatorWrapper = styled.div`
+export const Pagination = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 15px;
+  margin-top: 2rem;
 `;
 
-export const Button = styled.button`
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+export const PageButton = styled.button`
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
   color: #333;
   cursor: pointer;
-  font-size: 16px;
-  margin: 0 5px;
-  padding: 5px 10px;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--rojo);
+    color: #FFFFFF;
+  }
 `;
 
-export const PageNumber = styled.span`
-  font-size: 16px;
-  margin: 0 10px;
+export const PrevButton = styled(PageButton)`
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: #ccc;
+    color: #ddd;
+  }
+`;
+
+
+export const NextButton = styled(PageButton)`
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: #ccc;
+    color: #ddd;
+  }
 `;

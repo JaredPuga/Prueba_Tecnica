@@ -1,74 +1,72 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { showAllPokemons } from '../features/pokemons/pokemonActions';
-import Loading from './Loading';
-import PokeCell from './PokeCell';
-import Paginator from './Paginator';
-import { Table, TableHeadCell } from '../styles/styledTableData';
-
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { showAllPokemons } from "../features/pokemons/pokemonActions";
+import Loading from "./Loading";
+import PokeCell from "./PokeCell";
+import Paginator from "./Paginator";
+import { Table, TableHeadCell } from "../styles/styledTableData";
 
 export default function TableData() {
+  const { data, error, success, loading } = useSelector(
+    (state) => state.pokemons
+  );
 
-  const { data, error, success, loading } = useSelector(state => state.pokemons) 
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [pokemons, setPokemons] = useState([])
-  const [page, setPage] = useState(1)
-  const limit = 5
-  
-  useEffect(() => {
-    dispatch(showAllPokemons({page, limit}))
-  }, [dispatch, page])
-  
+  const [pokemons, setPokemons] = useState([]);
+  const [page, setPage] = useState(1);
+  const limit = 5;
 
   useEffect(() => {
-    
-    if(success) {
-      setPokemons(data)
+    dispatch(showAllPokemons({ page, limit }));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    if (success) {
+      setPokemons(data);
     } else {
-      setPokemons([])
+      setPokemons([]);
     }
-    
+
     if (error) {
       console.log(error);
     }
-
-  }, [error, success, data])
-
+  }, [error, success, data]);
 
   return (
     <>
-      {
-        loading ? (<Loading />) : (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
           <Table>
-          <thead>
-            <tr>
-              <TableHeadCell>#</TableHeadCell>
-              <TableHeadCell>Nombre</TableHeadCell>
-              <TableHeadCell>Vista Previa</TableHeadCell>
-              <TableHeadCell>Tipos</TableHeadCell>
-              <TableHeadCell>Habilidades</TableHeadCell>
-              <TableHeadCell></TableHeadCell>
-            </tr>
-          </thead>
-          <tbody>
-            { 
-                pokemons.length > 0 && pokemons.map(poke => (
+            <thead>
+              <tr>
+                <TableHeadCell>#</TableHeadCell>
+                <TableHeadCell>Nombre</TableHeadCell>
+                <TableHeadCell>Vista Previa</TableHeadCell>
+                <TableHeadCell>Tipos</TableHeadCell>
+                <TableHeadCell>Habilidades</TableHeadCell>
+                <TableHeadCell></TableHeadCell>
+              </tr>
+            </thead>
+            <tbody>
+              {pokemons.length > 0 &&
+                pokemons.map((poke) => (
                   <tr key={poke.id}>
                     <PokeCell pokemon={poke} />
                   </tr>
-                ))
-            }
-          </tbody>
-        </Table>
-        
-        <Paginator totalPages={130} currentPage={page} onPageChange={setPage} />
+                ))}
+            </tbody>
+          </Table>
+
+          <Paginator
+            totalPages={130}
+            currentPage={page}
+            onPageChange={setPage}
+          />
         </>
-      )
-    }
-  </>
+      )}
+    </>
   );
 }
-

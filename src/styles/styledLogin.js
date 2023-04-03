@@ -49,15 +49,25 @@ export const Input = styled.input`
 export const Boton = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #0077cc;
+  background-color: #363232;
   color: #ffffff;
   border-radius: 5px;
   border: none;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
   &:hover {
-    background-color: #005fa3;
+    background-color: #000000;
   }
+`;
+
+export const Dissabled = styled.button`
+  background-color: #ccc;
+  color: #888;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  width: 30%;
+  padding: 10px;
+  cursor: not-allowed;
 `;

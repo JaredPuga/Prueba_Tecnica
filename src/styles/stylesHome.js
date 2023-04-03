@@ -4,17 +4,24 @@ export const Titulo = styled.h1`
     display: flex;
     align-items: center;
     font-family: 'Pokemon Solid', sans-serif;
-    font-size: 4rem;
+    font-size: 2rem;
     margin: 0;
-    letter-spacing: 6px; 
+    letter-spacing: 6px;
+
+    @media (min-width: 768px) {
+        font-size: 4rem;
+    }
 `;
 
 export const TituloUser = styled.h3`
-    font-size: 1.5rem;
+    font-size: 1rem;
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
+    @media (min-width: 768px) {
+        font-size: 1.5rem;
+    }
 `;
 
 export const TituloUserName = styled.span`
@@ -25,8 +32,12 @@ export const GridPrincipal = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 70px;
-    margin-top: 0;
+    margin: 0;
+
+    @media (min-width: 768px) {
+        margin: 70px;
+        margin-top: 0;
+    }
 `;
 
 export const GridButtons = styled.div`

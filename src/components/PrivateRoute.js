@@ -1,13 +1,10 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
-export const PrivateRoute = ({auth, children}) => {
+export const PrivateRoute = ({ auth, children }) => {
+  if (auth.value === "false") {
+    return <Navigate to={"/"} />;
+  }
 
-    if(auth.value === 'false') {
-        return <Navigate to={'/'}/>
-    }
-
-  return children
-}
-
-
+  return children;
+};

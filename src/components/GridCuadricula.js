@@ -6,54 +6,52 @@ import Loading from "./Loading";
 import GridItem from "./GridItem";
 
 export default function GridCuadricula() {
+  const { data, error, success, loading } = useSelector(
+    (state) => state.pokemons
+  );
 
-  const { data, error, success, loading } = useSelector(state => state.pokemons)
-
-  const dispatch = useDispatch()
-  const [pokemons, setPokemons] = useState([])
-  const [limit, setLimit] = useState(15)
-  const page = 1
-
-  useEffect(() => {
-    dispatch(showAllPokemons({page ,limit}))
-  }, [dispatch, limit])
-  
+  const dispatch = useDispatch();
+  const [pokemons, setPokemons] = useState([]);
+  const [limit, setLimit] = useState(15);
+  const page = 1;
 
   useEffect(() => {
-    if(success) {
-      setPokemons(data)
+    dispatch(showAllPokemons({ page, limit }));
+  }, [dispatch, limit]);
+
+  useEffect(() => {
+    if (success) {
+      setPokemons(data);
     } else {
-      setPokemons([])
+      setPokemons([]);
     }
-    
+
     if (error) {
       console.log(error);
     }
-
-  }, [error, success, data])
+  }, [error, success, data]);
 
   const handleScroll = () => {
-    if(window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-      setLimit(prev => prev + 10 )
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setLimit((prev) => prev + 10);
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-  }, [])
-  
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-        <>
-              <GridContainer>
-                { 
-                  pokemons.map(poke => (
-                      <GridItem key={poke.id} pokemon={poke}/>
-                  ))
-                }
-              </GridContainer>
-              {
-                loading && <Loading />
-              }
-        </>
-  )
+    <>
+      <GridContainer>
+        {pokemons.map((poke) => (
+          <GridItem key={poke.id} pokemon={poke} />
+        ))}
+      </GridContainer>
+      {loading && <Loading />}
+    </>
+  );
 }

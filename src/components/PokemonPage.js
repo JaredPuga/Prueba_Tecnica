@@ -1,74 +1,111 @@
-import { useEffect, useState } from "react"
-import { Link, Navigate, useParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { showAbilities, showMovimientos, showPokemonID } from "../features/pokemons/pokemonActions"
-import { CapWord } from "../helpers/CapWord"
-import { RedBackground, TypeColor } from "../styles/styledComponents"
-import { AbilitiesPokemon, Button, Columna1, Columna2, Container, ContainerPrincipal, GridContainer, ImagenSprite, LeftArrow, MovesPokemon, NamePokemon, RightArrow, DivTypes, Name, DivContenedor } from "../styles/styledPokemonPage"
-import Loading from "./Loading"
-import PokemonMove from "./PokemonMove"
-import PokemonAbility from "./PokemonAbility"
-
+import { useEffect, useState } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  showAbilities,
+  showMovimientos,
+  showPokemonID,
+} from "../features/pokemons/pokemonActions";
+import { CapWord } from "../helpers/CapWord";
+import { RedBackground, TypeColor } from "../styles/styledComponents";
+import {
+  AbilitiesPokemon,
+  Button,
+  Columna1,
+  Columna2,
+  Container,
+  ContainerPrincipal,
+  GridContainer,
+  ImagenSprite,
+  LeftArrow,
+  MovesPokemon,
+  NamePokemon,
+  RightArrow,
+  DivTypes,
+  Name,
+  DivContenedor,
+} from "../styles/styledPokemonPage";
+import Loading from "./Loading";
+import PokemonMove from "./PokemonMove";
+import PokemonAbility from "./PokemonAbility";
 
 export default function PokemonPage() {
-
-  
-
-  const { dataPokemon, errorPokemon, successPokemon, loadingPokemon } = useSelector(state => state.pokemon)
-  const { dataMove, errorMove, successMove, loadingMove } = useSelector(state => state.moves)
-  const { dataAbility, errorAbility, successAbility, loadingAbility } = useSelector(state => state.ability)
-  const [pokemonData, setPokemonData] = useState({})
-  const [pokemonMoves, setPokemonMoves] = useState([])
-  const [pokemonAbilities, setPokemonAbilities] = useState([])
-  const [imagenActual, setImagenActual] = useState(0)
-  const { id } = useParams()
-  const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
-
-  const imagenes = [
-    pokemonData.sprites?.other['official-artwork'].front_shiny, 
-    pokemonData.sprites?.other.home.front_shiny,
-    pokemonData.sprites?.front_shiny,
-    pokemonData.sprites?.back_shiny,
-    pokemonData.sprites?.other.home.front_default,
-  ]
+  const { dataPokemon, errorPokemon, successPokemon, loadingPokemon } =
+    useSelector((state) => state.pokemon);
+  const { dataMove, successMove, loadingMove } = useSelector(
+    (state) => state.moves
+  );
+  const { dataAbility, successAbility, loadingAbility } = useSelector(
+    (state) => state.ability
+  );
+  const [pokemonData, setPokemonData] = useState({});
+  const [pokemonMoves, setPokemonMoves] = useState([]);
+  const [pokemonAbilities, setPokemonAbilities] = useState([]);
+  const [imagenActual, setImagenActual] = useState(0);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const [imagenes, setImagenes] = useState([]);
 
   useEffect(() => {
-    const value = localStorage.getItem('isAuth')
+    setImagenes([
+      pokemonData.sprites?.other["official-artwork"].front_shiny,
+      pokemonData.sprites?.other.home.front_shiny,
+      pokemonData.sprites?.front_shiny,
+      pokemonData.sprites?.back_shiny,
+      pokemonData.sprites?.other.home.front_default,
+    ]);
+  }, [pokemonData]);
+
+  useEffect(() => {
+    const value = localStorage.getItem("isAuth");
     if (!value) {
-      localStorage.setItem('isAuth', false)
+      localStorage.setItem("isAuth", false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    setPokemonData({})
-    dispatch(showPokemonID(id))
-    dispatch(showMovimientos(id))
-    dispatch(showAbilities(id))
-    dispatch(showAbilities(id))
-  }, [dispatch, id])
+    setPokemonData({});
+    dispatch(showPokemonID(id));
+    dispatch(showMovimientos(id));
+    dispatch(showAbilities(id));
+    dispatch(showAbilities(id));
+  }, [dispatch, id]);
 
   useEffect(() => {
-    if(successPokemon && successMove && successAbility) {
-      setPokemonData(dataPokemon)
-      setPokemonMoves(dataMove)
-      setPokemonAbilities(dataAbility)
+    if (successPokemon && successMove && successAbility) {
+      setPokemonData(dataPokemon);
+      setPokemonMoves(dataMove);
+      setPokemonAbilities(dataAbility);
     } else {
-      setPokemonData({})
-      setPokemonMoves([])
+      setPokemonData({});
+      setPokemonMoves([]);
     }
     if (errorPokemon) {
       console.log(errorPokemon);
     }
-  }, [errorPokemon, successPokemon, dataPokemon, dataMove, successMove, dataAbility,successAbility])
+  }, [
+    errorPokemon,
+    successPokemon,
+    dataPokemon,
+    dataMove,
+    successMove,
+    dataAbility,
+    successAbility,
+  ]);
 
-  if (auth.value === 'false') {
-    return <Navigate to={'/'}/>
+  if (auth.value === "false") {
+    return <Navigate to={"/"} />;
   }
 
   return (
     <>
-      {loadingPokemon && successPokemon ? (
+      {loadingPokemon &&
+      successPokemon &&
+      loadingAbility &&
+      successAbility &&
+      loadingMove &&
+      successMove ? (
         <Loading />
       ) : (
         <ContainerPrincipal>
@@ -101,39 +138,44 @@ export default function PokemonPage() {
           <GridContainer>
             <Columna1>
               <DivContenedor>
-              <NamePokemon>
-              {pokemonData.name && <Name>{CapWord(pokemonData.name)}</Name>}
-              <DivTypes>
-              {pokemonData.types?.map(type => (
-                <TypeColor color={CapWord(type.type.name)} key={type.type.name}>{CapWord(type.type.name)}</TypeColor>
-            ))}
-              </DivTypes>
-              </NamePokemon>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus leo nunc, egestas eget hendrerit in, 
-                euismod suscipit quam. Mauris sed iaculis arcu, sit amet finibus risus. Duis pellentesque, tortor et placerat
-                lobortis, ligula dolor efficitur justo, sollicitudin vulputate orci sem viverra nibh. Sed iaculis, dolor eget
-                condimentum commodo, nibh velit gravida velit, ac consectetur ex ante nec lectus. In id placerat urna.
-                Curabitur vulputate, quam ac mollis fringilla, erat mauris pharetra nisi
-              </div>
+                <NamePokemon>
+                  {pokemonData.name && <Name>{CapWord(pokemonData.name)}</Name>}
+                  <DivTypes>
+                    {pokemonData.types?.map((type) => (
+                      <TypeColor
+                        color={CapWord(type.type.name)}
+                        key={type.type.name}
+                      >
+                        {CapWord(type.type.name)}
+                      </TypeColor>
+                    ))}
+                  </DivTypes>
+                </NamePokemon>
+                <div>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Vivamus leo nunc, egestas eget hendrerit in, euismod suscipit
+                  quam. Mauris sed iaculis arcu, sit amet finibus risus. Duis
+                  pellentesque, tortor et placerat lobortis, ligula dolor
+                  efficitur justo, sollicitudin vulputate orci sem viverra nibh.
+                  Sed iaculis, dolor eget condimentum commodo, nibh velit
+                  gravida velit, ac consectetur ex ante nec lectus. In id
+                  placerat urna. Curabitur vulputate, quam ac mollis fringilla,
+                  erat mauris pharetra nisi
+                </div>
               </DivContenedor>
               <AbilitiesPokemon>
                 <Name>Habilidades</Name>
-                {
-                  pokemonAbilities?.map(ability => (
-                    <PokemonAbility key={ability.id} ability={ability} />
-                  ))
-                }
+                {pokemonAbilities?.map((ability) => (
+                  <PokemonAbility key={ability.id} ability={ability} />
+                ))}
               </AbilitiesPokemon>
             </Columna1>
             <Columna2>
               <MovesPokemon>
                 <Name>Movimientos</Name>
-                  {
-                    pokemonMoves?.slice(0,10).map(move => (
-                      <PokemonMove key={move.id} move={move}/>
-                    ))
-                  }
+                {pokemonMoves?.slice(0, 10).map((move) => (
+                  <PokemonMove key={move.id} move={move} />
+                ))}
               </MovesPokemon>
             </Columna2>
           </GridContainer>
