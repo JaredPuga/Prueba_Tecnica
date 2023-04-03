@@ -1,19 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { showAllPokemons } from "../features/pokemons/pokemonActions";
+import { GridContainer } from "../styles/stylesGridCuadricula";
 import Loading from "./Loading";
 import GridItem from "./GridItem";
-
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-  grid-gap: 16px;
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
-  }
-`;
-
 
 export default function GridCuadricula() {
 
