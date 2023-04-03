@@ -47,36 +47,58 @@ export const LeftArrow = styled(Arrow)`
 export const Button = styled.button`
   background-color: var(--rojo);
   color: #FFFFFF;
+  padding: 15px;
+  font-weight: bold;
+  margin-top: 15px;
+  &:hover {
+    background-color: #201E1E;
+    cursor: pointer;
+  }
 `;
 
 export const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
   height: auto;
   margin-top: 20px;
 `;
 
 export const Columna1 = styled.div`
-  background-color: #ccc;
-  //display: flex;
-  //justify-content: space-between;
+  grid-column: 1/3;
 `;
 
 export const Columna2 = styled.div`
-  background-color: #aaa;
-
+  border: 1px solid;
+  padding: 25px;
 `;
 
 export const NamePokemon = styled.div`
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   grid-row: 1;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const AbilitiesPokemon = styled.div`
-  grid-column: 1/ span 2;
+  grid-column: 1;
+  padding: 25px;
+  border: 1px solid;
+  margin-top: 15px;
 `;
 
 export const MovesPokemon = styled.div`
-  grid-column: 1/ span 2;
+  grid-column: 1;
 `
+
+export const DivTypes = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
+export const Name = styled.h1`
+  margin: 0;
+  font-size: 45px;
+  font-weight: 300;
+`;
