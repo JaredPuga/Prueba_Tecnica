@@ -64,7 +64,7 @@ export default function TableData() {
           </tbody>
         </Table>
         
-        <Paginator totalPages={255} currentPage={page} onPageChange={setPage} />
+        <Paginator totalPages={130} currentPage={page} onPageChange={setPage} />
         </>
       )
     }

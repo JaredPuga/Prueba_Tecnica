@@ -100,7 +100,8 @@ export const DivTypes = styled.div`
 export const Name = styled.h1`
   margin: 0;
   font-size: 45px;
-  font-weight: 300;
+  font-weight: 100;
+  color: #E3A231;
 `;
 
 export const DivContenedor = styled.div`

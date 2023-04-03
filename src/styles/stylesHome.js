@@ -14,6 +14,7 @@ export const TituloUser = styled.h3`
     display: flex;
     flex-direction: row;
     gap: 5px;
+    align-items: center;
 `;
 
 export const TituloUserName = styled.span`

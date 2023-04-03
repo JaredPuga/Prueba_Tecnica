@@ -10,7 +10,10 @@ export const LoginContainer = styled.div`
 `;
 
 export const Titulo = styled.h1`
-  color: #5B6356;
+  color: #000000;
+  letter-spacing: 5px;
+  font-size: 50px; 
+  font-family: 'Pokemon Solid', sans-serif;
 `;
 
 export const LoginForm = styled.form`

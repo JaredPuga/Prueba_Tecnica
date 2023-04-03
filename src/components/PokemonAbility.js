@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { CapWord } from "../helpers/CapWord";
 
 const TitleAbility = styled.h1`
-    font-size: 20px;   
+    font-size: 20px;
+    font-weight: bold;
 `;
 
 const DescriptionAbility = styled.p`

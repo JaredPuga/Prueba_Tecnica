@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, Navigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { showAbilities, showMovimientos, showPokemonID } from "../features/pokemons/pokemonActions"
 import { CapWord } from "../helpers/CapWord"
@@ -12,6 +12,8 @@ import PokemonAbility from "./PokemonAbility"
 
 export default function PokemonPage() {
 
+  
+
   const { dataPokemon, errorPokemon, successPokemon, loadingPokemon } = useSelector(state => state.pokemon)
   const { dataMove, errorMove, successMove, loadingMove } = useSelector(state => state.moves)
   const { dataAbility, errorAbility, successAbility, loadingAbility } = useSelector(state => state.ability)
@@ -21,6 +23,7 @@ export default function PokemonPage() {
   const [imagenActual, setImagenActual] = useState(0)
   const { id } = useParams()
   const dispatch = useDispatch()
+  const auth = useSelector(state => state.auth)
 
   const imagenes = [
     pokemonData.sprites?.other['official-artwork'].front_shiny, 
@@ -29,7 +32,14 @@ export default function PokemonPage() {
     pokemonData.sprites?.back_shiny,
     pokemonData.sprites?.other.home.front_default,
   ]
-  
+
+  useEffect(() => {
+    const value = localStorage.getItem('isAuth')
+    if (!value) {
+      localStorage.setItem('isAuth', false)
+    }
+  }, [])
+
   useEffect(() => {
     setPokemonData({})
     dispatch(showPokemonID(id))
@@ -51,6 +61,10 @@ export default function PokemonPage() {
       console.log(errorPokemon);
     }
   }, [errorPokemon, successPokemon, dataPokemon, dataMove, successMove, dataAbility,successAbility])
+
+  if (auth.value === 'false') {
+    return <Navigate to={'/'}/>
+  }
 
   return (
     <>
